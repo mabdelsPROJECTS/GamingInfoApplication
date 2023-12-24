@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void getData(View v) {
+        progBar.setVisibility(View.VISIBLE);
         if (isPressed) {
             // Disable further clicks until a delay
             isPressed = false;
@@ -168,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(TAG, "onResponse: " + response);
                         parseReviewJSON(response, position);
                         try {
-                            Thread.sleep(300);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -194,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("X-RapidAPI-Key", apiKeyDePaulEmail);
+                params.put("X-RapidAPI-Key", thirdApiKeyBackupGmail);
                 params.put("X-RapidAPI-Host", "opencritic-api.p.rapidapi.com");
                 params.put("accept", "application/json");
 
@@ -250,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("X-RapidAPI-Key", apiKeyDePaulEmail);
+                params.put("X-RapidAPI-Key", thirdApiKeyBackupGmail);
                 params.put("X-RapidAPI-Host", "opencritic-api.p.rapidapi.com");
 
                 return params;
@@ -265,6 +266,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (position < size) {
             Exercise exercise = arrayList.get(position);
             String gameId = exercise.getGameId();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             doReviewDownload(gameId, position);
             position++;
         }
@@ -391,12 +397,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-            progBar.setVisibility(View.INVISIBLE);
+           // progBar.setVisibility(View.INVISIBLE);
 
         } catch (
                 JSONException e) {
             e.printStackTrace();
         }
+        progBar.setVisibility(View.INVISIBLE);
     }
 
         public void getGameId(View v){
@@ -404,6 +411,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     public void goToNewlyReleasedGame(View v){
+        progBar.setVisibility(View.VISIBLE);
         position = 0;
         if (gameReviewArrayList.size() != 0) {
             int size = gameReviewArrayList.size();
@@ -431,10 +439,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onResponse(String response) {
                         parseJSON(response);
                         try {
-                            Thread.sleep(500);
+                            Thread.sleep(300);
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
+
                         goToDoReviewDownload();
 
 
@@ -456,7 +465,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("X-RapidAPI-Key", apiKeyDePaulEmail);
+                params.put("X-RapidAPI-Key", thirdApiKeyBackupGmail);
                 params.put("X-RapidAPI-Host", "opencritic-api.p.rapidapi.com");
 
                 return params;
