@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="xboxGreen">#FF107C10</color>
+    <color name="playstationBlue">#FF006FCD</color>
+    <color name="beigeColor">#FFfff0db</color>
+    <color name="darkRed">#FF800020</color>
+    <color name="steamColor">#FF36454F</color>
+</resources>

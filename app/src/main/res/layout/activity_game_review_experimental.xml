@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/design_default_color_error"
+    android:fillViewport="true"
+    tools:context=".ExerciseActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/playstationBlue"
+        tools:context=".ExerciseActivity">
+
+
+        <TextView
+            android:id="@+id/gameName"
+            android:layout_width="215dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="@font/cinzel"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/topCriticScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/cinzel"
+            android:text="Critic Score"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gameDescription" />
+
+
+        <TextView
+            android:id="@+id/superheroWeight"
+            android:layout_width="361dp"
+            android:layout_height="40dp"
+            android:fontFamily="@font/cinzel"
+            android:text="textview"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gameName" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gameName" />
+
+        <TextView
+            android:id="@+id/percentRecommend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/cinzel"
+            android:text="% Recommend"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topCriticScore" />
+
+        <TextView
+            android:id="@+id/medianScore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/cinzel"
+            android:text="Median Score"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/percentRecommend" />
+
+        <TextView
+            android:id="@+id/gameDescription"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="300dp"
+            android:fontFamily="@font/cinzel"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+
+        <ProgressBar
+            android:id="@+id/topCriticProgBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminateTint="@color/white"
+            android:scaleY="4.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/topCriticScore"
+            app:layout_constraintTop_toBottomOf="@+id/gameDescription" />
+
+        <ProgressBar
+            android:id="@+id/percentRecomendProgBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminateTint="@color/white"
+            android:scaleY="4.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/percentRecommend"
+            app:layout_constraintTop_toBottomOf="@+id/topCriticProgBar" />
+
+        <ProgressBar
+            android:id="@+id/medianScoreProgBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:indeterminateTint="@color/white"
+            android:scaleY="4.5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/medianScore"
+            app:layout_constraintTop_toBottomOf="@+id/percentRecomendProgBar" />
+
+        <TextView
+            android:id="@+id/topCriticInsideScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/topCriticProgBar"
+            app:layout_constraintEnd_toEndOf="@+id/topCriticProgBar"
+            app:layout_constraintStart_toEndOf="@+id/topCriticScore"
+            app:layout_constraintTop_toTopOf="@+id/topCriticProgBar" />
+
+        <TextView
+            android:id="@+id/percentRecomendInsideScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/percentRecomendProgBar"
+            app:layout_constraintEnd_toEndOf="@+id/percentRecomendProgBar"
+            app:layout_constraintStart_toStartOf="@+id/percentRecomendProgBar"
+            app:layout_constraintTop_toTopOf="@+id/percentRecomendProgBar" />
+
+        <TextView
+            android:id="@+id/medianScoreInsideScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/medianScoreProgBar"
+            app:layout_constraintEnd_toEndOf="@+id/medianScoreProgBar"
+            app:layout_constraintHorizontal_bias="0.479"
+            app:layout_constraintStart_toStartOf="@+id/medianScoreProgBar"
+            app:layout_constraintTop_toTopOf="@+id/medianScoreProgBar" />
+
+        <TextView
+            android:id="@+id/expandOrHideTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="259dp"
+            android:fontFamily="serif"
+            android:onClick="setToOriginalDescriptionText"
+            android:text="Tap To Expand"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/gameDescription"
+            app:layout_constraintEnd_toEndOf="@+id/gameDescription"
+            app:layout_constraintStart_toStartOf="@+id/gameDescription" />
+
+        <TextView
+            android:id="@+id/goToOutletReivews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="serif"
+            android:onClick="goToOutletReviews"
+            android:text="Tap To Outlet Reviews"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/medianScoreProgBar" />
+
+        <ImageView
+            android:id="@+id/steamIconImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="128dp"
+            android:onClick="goToSteam"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goToOutletReivews"
+            app:srcCompat="@drawable/steamiconsquare" />
+
+        <ImageView
+            android:id="@+id/playstationIconImage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:onClick="goToPlaystation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goToOutletReivews"
+            app:srcCompat="@drawable/playstationstoreicon" />
+
+        <ImageView
+            android:id="@+id/xboxIconImage"
+            android:layout_width="36dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="goToXbox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goToOutletReivews"
+            app:srcCompat="@drawable/xboxstoreicon" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
