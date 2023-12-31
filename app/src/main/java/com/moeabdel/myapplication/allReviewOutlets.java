@@ -154,6 +154,9 @@ public class allReviewOutlets extends AppCompatActivity {
                 else if(color.equals("steamBlack")){
                     progressBar.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.steamColor)));
                 }
+                else if(color.equals("nintendoRed")){
+                    progressBar.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nintendoRed)));
+                }
 
                 TextView textView = new TextView(this);
                 String scoreString = String.valueOf(score);

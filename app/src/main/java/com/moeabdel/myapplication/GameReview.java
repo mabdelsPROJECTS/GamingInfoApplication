@@ -60,6 +60,7 @@ public class GameReview implements Serializable {
     private int gameIdNum;
     private String screenShotsUrl;
     private String allYoutubeVideos;
+    private String releaseDate;
     public int getPercentRecommend(){
         return percentRecommend;
     }
@@ -81,12 +82,16 @@ public class GameReview implements Serializable {
     public String getAllYoutubeVideos(){
         return allYoutubeVideos;
     }
+    public String getReleaseDate(){
+        return releaseDate;
+    }
 
 
 
     public GameReview( String title, String tier, String description, int topCriticScore,
                        int percentRecommend, String gameName, String allPlatforms, String fullImageUrl,
-                       String genresComplete, int medianScore, int gameIdNum, String screenShotsUrl, String allYoutubeVideos){
+                       String genresComplete, int medianScore, int gameIdNum, String screenShotsUrl,
+                       String allYoutubeVideos, String releaseDate){
 
     //this.outlet = outlet;
     this.gameName = gameName;
@@ -104,5 +109,6 @@ public class GameReview implements Serializable {
     this.gameIdNum = gameIdNum;
     this.screenShotsUrl = screenShotsUrl;
     this.allYoutubeVideos = allYoutubeVideos;
+    this.releaseDate = releaseDate;
     }
 }

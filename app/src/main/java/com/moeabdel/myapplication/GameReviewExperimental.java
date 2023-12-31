@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,6 +37,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +49,8 @@ import java.util.Map;
 public class GameReviewExperimental extends AppCompatActivity {
 
     private TextView gameName;
+    private ImageView nintendoIconImage;
+    private TextView releaseDate;
 
     private ImageView backgroundImage;
     private ImageView stampImage;
@@ -108,6 +115,8 @@ public class GameReviewExperimental extends AppCompatActivity {
         steamIconImage = binding.steamIconImage;
         playstationIconImage = binding.playstationIconImage;
         xboxIconImage = binding.xboxIconImage;
+        nintendoIconImage = binding.nintendoIconImage;
+        releaseDate = binding.releaseDateTextView;
         picasso = Picasso.get();
         percentRecommendProg.setMax(100);
         medianScoreProg.setMax(100);
@@ -128,8 +137,9 @@ public class GameReviewExperimental extends AppCompatActivity {
             String[] splitScreenShots = screenShotsUrl.split(",");
             String allYoutubeVideos = extras.getString("allYoutubeVideos");
             String[] allYoutubeVideosSplit = allYoutubeVideos.split(",");
+            String tier = extras.getString("tier");
             ViewPager viewPager = findViewById(R.id.viewPager);
-            ViewPagerAdapter adapter = new ViewPagerAdapter(this,splitScreenShots);
+            ViewPagerAdapter adapter = new ViewPagerAdapter(this,splitScreenShots, tier);
             viewPager.setAdapter(adapter);
 
 
@@ -137,8 +147,18 @@ public class GameReviewExperimental extends AppCompatActivity {
             String imageUrl = extras.getString("image");
             String allPlatforms = extras.getString("allPlatforms");
             String title = extras.getString("title");
-            String tier = extras.getString("tier");
+            //String tier = extras.getString("tier");
             String name = extras.getString("name");
+            String releaseDateString = extras.getString("releaseDate");
+
+            //if(releaseDateString != null) {
+                Instant instant = Instant.parse(releaseDateString);
+                LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyy");
+                String normalDateString = dateTime.format(formatter);
+                releaseDate.setText("Release Date: " + normalDateString);
+                releaseDate.setVisibility(View.VISIBLE);
+           // }
             // String hasLootBoxes = extras.getString("hasLootBoxes");
             String descriptionText = extras.getString("description");
             //gameIdNum = extras.getString("gameId");
@@ -172,36 +192,57 @@ public class GameReviewExperimental extends AppCompatActivity {
                 layout.setBackgroundColor(Color.BLACK);
                 //backgroundImage.setImageResource(R.drawable.newxboximage);
                 playstationIconImage.setVisibility(View.GONE);
+                nintendoIconImage.setVisibility(View.GONE);
+
 
                 colorLayout = "Black";
             } else if (allPlatforms.contains("PlayStation") && !allPlatforms.contains("Xbox") && allPlatforms.contains("PC")) {
                 layout.setBackgroundColor(Color.BLACK);
                 //backgroundImage.setImageResource(R.drawable._ndportraitps);
                 xboxIconImage.setVisibility(View.GONE);
+                nintendoIconImage.setVisibility(View.GONE);
                 colorLayout = "Black";
             } else if (allPlatforms.contains("PlayStation") && !allPlatforms.contains("Xbox") && !allPlatforms.contains("PC)")) {
                 layout.setBackgroundColor(ContextCompat.getColor(this, R.color.playstationBlue));
                 xboxIconImage.setVisibility(View.GONE);
                 steamIconImage.setVisibility(View.GONE);
+                nintendoIconImage.setVisibility(View.GONE);
                 colorLayout = "Blue";
             } else if (allPlatforms.contains("PC") && allPlatforms.contains("PlayStation") && allPlatforms.contains("Xbox")) {
                 layout.setBackgroundColor(Color.BLACK);
+                nintendoIconImage.setVisibility(View.GONE);
                 colorLayout = "Black";
             } else if (allPlatforms.contains("Xbox") && !allPlatforms.contains("PlayStation") && !allPlatforms.contains("PC")) {
                 layout.setBackgroundColor(ContextCompat.getColor(this, R.color.xboxGreen));
                 //backgroundImage.setImageResource(R.drawable.newxboximage);
                 playstationIconImage.setVisibility(View.GONE);
+                nintendoIconImage.setVisibility(View.GONE);
                 colorLayout = "Green";
             } else if (allPlatforms.contains("PC") && !allPlatforms.contains("PlayStation") && !allPlatforms.contains("Xbox")) {
                 layout.setBackgroundColor(ContextCompat.getColor(this, R.color.steamColor));
                 playstationIconImage.setVisibility(View.GONE);
                 xboxIconImage.setVisibility(View.GONE);
+                nintendoIconImage.setVisibility(View.GONE);
                 colorLayout = "steamBlack";
+            }
+            else if(allPlatforms.contains("Nintendo Switch") || allPlatforms.contains("Wii U")){
+                layout.setBackgroundColor(ContextCompat.getColor(this, R.color.nintendoRed));
+                playstationIconImage.setVisibility(View.GONE);
+                xboxIconImage.setVisibility(View.GONE);
+                steamIconImage.setVisibility(View.GONE);
+                colorLayout = "nintendoRed";
+                topCriticProg.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+                percentRecommendProg.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+                medianScoreProg.setProgressTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.white)));
+                topCriticScoreInside.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nintendoRed)));
+                medianScoreInside.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nintendoRed)));
+                percentRecommendInside.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.nintendoRed)));
             }
             String percentRecommendString = String.valueOf(percentRecommend);
             avaliableOn.setText("Available on: " + allPlatforms);
             gameName.setText(name);
             originalDescriptionText = descriptionText;
+
             String[] words = descriptionText.split("\\s+");
             wordCount = words.length;
 
@@ -519,6 +560,45 @@ public class GameReviewExperimental extends AppCompatActivity {
         };
         queue.add(getRequest);
     }
+
+    public void goToNintendo(View v){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        Uri.Builder urlBuilder = Uri.parse(steamPsnXboxUrl).buildUpon();
+
+        urlBuilder.appendQueryParameter("q", gameName.getText().toString() + " price on Nintendo");
+        urlBuilder.appendQueryParameter("key", GoogleSearchAPIKey);
+        String url = urlBuilder.build().toString();
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parseSteam(response);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("MainActivity", "error => " + error.toString());
+                        Toast.makeText(GameReviewExperimental.this, "Error with Search URL", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("X-RapidAPI-Key", thirdApiKeyBackup);
+                params.put("X-RapidAPI-Host", "opencritic-api.p.rapidapi.com");
+
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
 
     public void openInChrome(String url) {
         Uri uri = Uri.parse(url);

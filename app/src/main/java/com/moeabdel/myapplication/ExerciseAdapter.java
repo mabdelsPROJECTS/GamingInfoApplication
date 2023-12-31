@@ -1,6 +1,7 @@
 package com.moeabdel.myapplication;
 
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,15 +44,11 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseViewHolder holder, int position) {
-       // SuperHero superhero = superHeroesArrayList.get(position);
-        //Exercise exercise = exerciseArrayList.get(position);
         GameReview gameReview = gameReviewArrayList.get(position);
         String allPlatforms = gameReview.getAllPlatforms();
         String name = gameReview.getGameName();
         String genres = gameReview.getGenresComplete();
         String fullImageUrl = gameReview.getFullImageUrl();
-        // String bodypart = exercise.getbodyPart();
-         //String gifUrl = exercise.getGifUrl();
         if (allPlatforms.contains("Xbox") && !allPlatforms.contains("PlayStation") && !allPlatforms.contains("PC")) {
             holder.layout.setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.xboxGreen));
             //backgroundImage.setImageResource(R.drawable.newxboximage);
@@ -59,7 +56,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseViewHolder> {
         } else if (allPlatforms.contains("PlayStation") && !allPlatforms.contains("Xbox") && !allPlatforms.contains("PC")) {
             holder.layout.setBackgroundColor(ContextCompat.getColor(mainActivity, R.color.playstationBlue));
 
-        } else if(allPlatforms.contains("PlayStation") && allPlatforms.contains("Xbox") && allPlatforms.contains("PC)")) {
+        } else if(allPlatforms.contains("PlayStation") && allPlatforms.contains("Xbox") && allPlatforms.contains("PC")) {
             holder.layout.setBackgroundColor(Color.BLACK);
 
         }
@@ -72,15 +69,20 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseViewHolder> {
 
 
         holder.recyclerViewTitleText.setText(name);
-         //holder.recyclerViewTitleText.setText(exercise.getName());
-         //holder.recyclerViewAliases.setText(bodypart);
         holder.recyclerViewPlatforms.setText(genres);
-         //Glide.with(mainActivity).load(fullImageUrl).into(holder.recyclerViewImage);
         picasso.load(fullImageUrl).error(R.drawable.noimagetodisplay).into(holder.recyclerViewImage);
-
-
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Your code that you want to execute after the delay
+            }
+        }, position * 300); // Adjust the delay time based on your preference
     }
+
+
+
+
 
     @Override
     public int getItemCount() {

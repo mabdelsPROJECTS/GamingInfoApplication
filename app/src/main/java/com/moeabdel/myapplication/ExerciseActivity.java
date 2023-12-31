@@ -542,6 +542,44 @@ public class ExerciseActivity extends AppCompatActivity {
         };
         queue.add(getRequest);
     }
+    public void goToNintendo(View v){
+        RequestQueue queue = Volley.newRequestQueue(this);
+        Uri.Builder urlBuilder = Uri.parse(steamPsnXboxUrl).buildUpon();
+
+        urlBuilder.appendQueryParameter("q", gameName.getText().toString() + " price on Nintendo");
+        urlBuilder.appendQueryParameter("key", GoogleSearchAPIKey);
+        String url = urlBuilder.build().toString();
+
+        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        parseSteam(response);
+
+                    }
+                },
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("MainActivity", "error => " + error.toString());
+                        Toast.makeText(ExerciseActivity.this, "Error with Search URL", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("X-RapidAPI-Key", thirdApiKeyBackup);
+                params.put("X-RapidAPI-Host", "opencritic-api.p.rapidapi.com");
+
+                return params;
+            }
+        };
+        queue.add(getRequest);
+    }
+
 
 }
 

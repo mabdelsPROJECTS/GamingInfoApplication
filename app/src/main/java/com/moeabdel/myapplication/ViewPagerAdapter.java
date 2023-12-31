@@ -31,13 +31,15 @@ public class ViewPagerAdapter extends PagerAdapter {
     private LayoutInflater inflater;
     private Context context;
     private int ratingImage;
+    private String tier;
 
-    public ViewPagerAdapter(Context context, String[] mediaUrls) {
+    public ViewPagerAdapter(Context context, String[] mediaUrls, String tier) {
         this.context = context;
         this.mediaUrls = mediaUrls;
         //this.progressBar = progressBar;
         //this.ratingImage = ratingImage;
         inflater = LayoutInflater.from(context);
+        this.tier = tier;
     }
 
     @Override
@@ -57,7 +59,6 @@ public class ViewPagerAdapter extends PagerAdapter {
                 public void onReady(YouTubePlayer youTubePlayer) {
                     // Video is ready, you can load and play the video here
                     String videoId = mediaUrls[position];
-
                     youTubePlayer.cueVideo(videoId, 0);
                 }
 
@@ -71,6 +72,7 @@ public class ViewPagerAdapter extends PagerAdapter {
              view = inflater.inflate(R.layout.pager_item, container, false);
             ImageView photoView = view.findViewById(R.id.imageView);
             ProgressBar progressBar = view.findViewById(R.id.stampImage);
+            ImageView ratingImage = view.findViewById(R.id.ratingImage);
 
             // Set visibility to VISIBLE before loading image
             progressBar.setVisibility(View.VISIBLE);
@@ -79,6 +81,21 @@ public class ViewPagerAdapter extends PagerAdapter {
                 @Override
                 public void onSuccess() {
                     // Image loading is successful, hide the ProgressBar
+                    if(position == 0 ){
+                        ratingImage.setVisibility(View.VISIBLE);
+                         if (tier.equals("Mighty")) {
+                           Picasso.get().load(R.drawable.masterpiece_12_8_2023).into(ratingImage);
+                          } else if (tier.equals("Strong")) {
+                             Picasso.get().load(R.drawable.good_12_8_2023).into(ratingImage);
+                         } else if (tier.equals("Fair")) {
+                             Picasso.get().load(R.drawable.average_12_8_2023).into(ratingImage);
+                          } else if (tier.equals("Weak")) {
+                             Picasso.get().load(R.drawable.below_average_12_8_2023).into(ratingImage);
+                         }
+                    }
+                    else{
+                        ratingImage.setVisibility(View.GONE);
+                    }
                     progressBar.setVisibility(View.INVISIBLE);
                 }
 
