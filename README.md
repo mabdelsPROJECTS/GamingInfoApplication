@@ -13,6 +13,9 @@ Gaming application that retrieve video game data, reviews, platform availability
 # Game Story Expanded
 <img src="Images/Game_5.png" width="300">
 
+# Visiting Displayed Console Icon's Website
+<img src="Images/Game_13.png" width="300">
+
 # Game Images and Video in ViewPager
 <img src="Images/Game_6.png" width="300">
 <img src="Images/Game_7.png" width="300">
