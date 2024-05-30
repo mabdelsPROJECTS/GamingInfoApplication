@@ -437,8 +437,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (jsonObject.has("images")) {
                     JSONObject images = jsonObject.getJSONObject("images");
                     if (images.has("box")) {
+                        String smallImage = " ";
                         JSONObject box = images.getJSONObject("box");
-                        String smallImage = box.getString("sm");
+                        if(box.has("sm")) {
+                             smallImage = box.getString("sm");
+                        }
                         smallImage = outletImageUrl + smallImage;
                         SecondRecyclerViewClass secondRecyclerViewClass = new SecondRecyclerViewClass(name, smallImage, tier, gameId, releaseDate);
                         if (!secondRecyclerViewList.contains(secondRecyclerViewClass)) {
