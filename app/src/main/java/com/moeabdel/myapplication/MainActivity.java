@@ -169,12 +169,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onResponse(String response) {
                         Log.d(TAG, "onResponse: " + response);
                         parseReviewJSON(response, position);
-                        try {
-                            Thread.sleep(300);
-                       } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                        goToDoReviewDownload();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Code to execute after the delay
+                                goToDoReviewDownload();
+                            }
+                        }, 1000); // 3000 milli
+
 
 
                     }
@@ -476,13 +479,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(String response) {
                         parseNewlyReleasedGamesJson(response);
-                        // try {
-                        //   Thread.sleep(300);
-                        //   } catch (InterruptedException e) {
-                        //   throw new RuntimeException(e);
-                        //  }
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Code to execute after the delay
 
-                        //goToDoReviewDownload();
+                            }
+                        }, 2000); // 3000 milli
 
 
                     }
